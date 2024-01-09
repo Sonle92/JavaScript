@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="#" name="frm_grade" method="post">
+      <label for="">Today</label>
+      <input type="number" name="txt_name" value="" />
+      <input
+        type="button"
+        name="btn_grade"
+        onclick="grade(txt_name.value)"
+        value="Define Grade"
+      />
+    </form>
+    <div id="str_grade">Display</div>
+    <script type="text/javascript">
+      function grade(name) {
+        var string_grade;
+        if (name >= 1 && name <= 7) {
+          if (name == 1) {
+            string_grade = "Chủ nhật";
+          } else if (name == 2) {
+            string_grade = "Thứ Hai";
+          } else if (name == 3) {
+            string_grade = "Thứ Ba";
+          } else if (name == 4) {
+            string_grade = "Thứ Tư";
+          } else if (name == 5) {
+            string_grade = "Thứ Năm";
+          } else if (name == 6) {
+            string_grade = "Thứ Sáu";
+          } else {
+            string_grade = "Thứ Bảy";
+          }
+        } else {
+          string_grade = "day must be between 1 and 7";
+        }
+        document.getElementById("str_grade").innerHTML =
+          "Display <b>" + string_grade + " </b>";
+      }
+    </script>
+  </body>
+</html>
