@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>New Product</h1>
+    <hr />
+    <form action="" name="frm">
+      <p>
+        <label>
+          Product Name
+          <input type="text" name="pname" id="pname" />
+        </label>
+        <label>
+          Product Picture
+          <input type="file" name="pic" id="pic" />
+        </label>
+        <label>
+          Unit Price
+          <input type="text" name="up" id="up" />
+        </label>
+      </p>
+      <p>
+        <button
+          type="button"
+          onclick="addProduct()"
+          style="background-color: rgb(19, 0, 128); color: white"
+        >
+          Add
+        </button>
+        <button type="button">Cancel</button>
+      </p>
+    </form>
+    <div id="productInfo"></div>
+    <script>
+      function addProduct() {
+        var productName = document.getElementById("pname").value;
+        var unitPrice = document.getElementById("up").value;
+        var fileInput = document.getElementById("pic");
+        var productPicture = fileInput.files[0];
+        var productInfoContainer = document.getElementById("productInfo");
+
+        if (productName && unitPrice) {
+          if (productPicture) {
+            var imageURL = URL.createObjectURL(productPicture);
+            var result = "<p></p>";
+            result +=
+              '<img src="' +
+              imageURL +
+              '" alt="Product Picture" style="max-width: 100%;" />';
+          }
+          result += "<p>" + productName + "</p>";
+          result += "<p>" + unitPrice + "đ</p>";
+          result +=
+            "<button style='background-color: green; color: white;'>Đặt mua</button>";
+          productInfoContainer.innerHTML = result;
+        } else {
+          alert("Vui lòng nhập đầy đủ thông tin sản phẩm!");
+          productInfoContainer.innerHTML = "";
+        }
+      }
+    </script>
+  </body>
+</html>

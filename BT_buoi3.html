@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="baitap.css" />
+  </head>
+  <body>
+    <form class="wap">
+        <h3>Bảng Điểm Của Em</h3>
+        <br />
+        S1 :
+        <input type="text" id="s1" /><br /><br />
+        S2 :
+         <input type="text" id="s2" /><br /><br />
+        Year:
+        <select id="year">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</o  ption></select
+        ><br /><br />
+        Sum :
+        <input type="text" id="tb" value="" /><br /><br />
+        <input type="button" onclick="Xloai()" value="OK" />
+        <input type="button" onclick="functionCancel()" value="Cancel" />
+        <p id = "kq"> </p>
+      </form>
+      
+      <script>
+        function Xloai() {
+          var s1 = parseInt(document.getElementById("s1").value);
+          var s2 = parseInt(document.getElementById("s2").value);
+          var year = document.getElementById("year");
+          var value = parseInt(year[year.selectedIndex].value); 
+          var tb;
+      
+          switch (value) {
+            case 1:
+              tb = (s1 + s2) / 2;
+              break;
+            case 2:
+              tb = (s1 + s2 * 2) / 3;
+              break;
+            case 3:
+              tb = (s1 + s2 * 3) / 4;
+              break;
+            case 4:
+              tb = (s1 + s2 * 4) / 5;
+              break;
+            default:
+              break;
+          }
+      
+          document.getElementById("tb").value = tb;
+      
+          if (tb >= 9) {
+            document.getElementById("kq").innerHTML = "XS";
+            document.getElementById("kq").style.color = "yellow";
+          } else if (tb >= 8) {
+            document.getElementById("kq").innerHTML = "G";
+            document.getElementById("kq").style.color = "red";
+          } else if (tb >= 7) {
+            document.getElementById("kq").innerHTML = "K";
+            document.getElementById("kq").style.color = "blue";
+          } else if (tb >= 5) {
+            document.getElementById("kq").innerHTML = "TB";
+            document.getElementById("kq").style.color = "black";
+          }
+        }
+      
+        function functionCancel() {
+          document.getElementById("s1").value = "";
+          document.getElementById("s2").value = "";
+          document.getElementById("tb").value = "";
+          document.getElementById("kq").innerHTML = "";
+          document.getElementById("kq").style.color = ""; // Reset color
+        }
+      </script>
+  </body>
+</html>
