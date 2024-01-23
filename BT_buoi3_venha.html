@@ -1,66 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Dien Thoai</title>
+    <style>
+      #cart {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+      }
+      .cart-item {
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+      .cart-item img {
+        width: 446px;
+        height: auto;
+        margin-right: 10px;
+      }
+    </style>
   </head>
   <body>
-    <h1>New Product</h1>
-    <hr />
-    <form action="" name="frm">
+    <form name="SunShine">
       <p>
         <label>
-          Product Name
+          Product Name:
           <input type="text" name="pname" id="pname" />
         </label>
         <label>
-          Product Picture
-          <input type="file" name="pic" id="pic" />
+          Product Picture:
+          <input type="file" name="pic" id="pic" accept="image/*" />
         </label>
         <label>
-          Unit Price
-          <input type="text" name="up" id="up" />
+          Product price:
+          <input type="number" name="price" id="price" />
         </label>
       </p>
-      <p>
-        <button
-          type="button"
-          onclick="addProduct()"
-          style="background-color: rgb(19, 0, 128); color: white"
-        >
-          Add
-        </button>
-        <button type="button">Cancel</button>
-      </p>
     </form>
-    <div id="productInfo"></div>
-    <script>
-      function addProduct() {
-        var productName = document.getElementById("pname").value;
-        var unitPrice = document.getElementById("up").value;
-        var fileInput = document.getElementById("pic");
-        var productPicture = fileInput.files[0];
-        var productInfoContainer = document.getElementById("productInfo");
-
-        if (productName && unitPrice) {
-          if (productPicture) {
-            var imageURL = URL.createObjectURL(productPicture);
-            var result = "<p></p>";
-            result +=
-              '<img src="' +
-              imageURL +
-              '" alt="Product Picture" style="max-width: 100%;" />';
-          }
-          result += "<p>" + productName + "</p>";
-          result += "<p>" + unitPrice + "đ</p>";
-          result +=
-            "<button style='background-color: green; color: white;'>Đặt mua</button>";
-          productInfoContainer.innerHTML = result;
-        } else {
-          alert("Vui lòng nhập đầy đủ thông tin sản phẩm!");
-          productInfoContainer.innerHTML = "";
-        }
+    <button type="button" onclick="add()">Thêm sản phẩm</button>
+    <div>
+      <h2>Điện thoại nổi bật nhất</h2>
+      <ul id="cart"></ul>
+    </div>
+    <script type="text/javascript">
+      function add() {
+        var picture = document.getElementById("pic").files[0];
+        var name = document.getElementById("pname").value;
+        var price = document.getElementById("price").value;
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var imgSrc = e.target.result;
+          var cartItem = document.createElement("li");
+          cartItem.className = "cart-item";
+          cartItem.innerHTML = `
+                    <img src='${imgSrc}' alt='Product Image' />
+                    <div>
+                        <p><strong>Product : ${name}</strong></p>
+                        <p>Price: ${price}</p>
+                    </div>
+                    <div>
+                        <button>Đặt mua</button>
+                    </div>
+                `;
+          document.getElementById("cart").appendChild(cartItem);
+        };
+        reader.readAsDataURL(picture);
       }
     </script>
   </body>
