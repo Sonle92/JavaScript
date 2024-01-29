@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đèn giao thông</title>
+    <style>
+      #red-light {
+        width: 70px;
+        height: 70px;
+        background-color: #000000;
+        border-radius: 50%;
+        position: absolute;
+        top: 168px;
+        right: 100px;
+        left: 235px;
+        bottom: 0px;
+      }
+      #yellow-light {
+        width: 70px;
+        height: 70px;
+        background-color: #000000;
+        border-radius: 50%;
+        position: absolute;
+        top: 250px;
+        right: 100px;
+        left: 235px;
+        bottom: 0px;
+      }
+      #green-light {
+        width: 70px;
+        height: 70px;
+        background-color: #000000;
+        border-radius: 50%;
+        position: absolute;
+        top: 334px;
+        right: 100px;
+        left: 235px;
+        bottom: 0px;
+      }
+      #red-light.active {
+        background-color: #ff0000;
+      }
+
+      #yellow-light.active {
+        background-color: #ffff00;
+      }
+
+      #green-light.active {
+        background-color: #00ff00;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="./den-giao-thong-d200.jpg" alt="" width="500px" height="500px" />
+    <div id="red-light"></div>
+    <div id="yellow-light"></div>
+    <div id="green-light"></div>
+    <button onclick="turnOnLight('red-light')">Red</button>
+    <button onclick="turnOnLight('yellow-light')">Yellow</button>
+    <button onclick="turnOnLight('green-light')">Green</button>
+
+    <script>
+      function turnOnLight(lightId) {
+        document.getElementById("red-light").classList.remove("active");
+        document.getElementById("yellow-light").classList.remove("active");
+        document.getElementById("green-light").classList.remove("active");
+        document.getElementById(lightId).classList.add("active");
+      }
+    </script>
+  </body>
+</html>
