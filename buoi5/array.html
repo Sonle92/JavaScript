@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Component</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .component-container {
+        padding: 20px;
+        border: 1px solid #ddd;
+        margin: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+      }
+      .image-container {
+        margin-bottom: 10px;
+      }
+      .details-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+      img {
+        width: 190px;
+        padding-left: 30px;
+      }
+      .buy {
+        margin-top: 10px;
+        background-color: red;
+        color: white;
+        padding: 7px;
+        border: 0px solid black;
+      }
+      .price {
+        padding-left: 20px;
+        text-decoration: line-through;
+      }
+      .name {
+        font-weight: 900;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #dcd9d9;
+        color: rgb(239, 239, 239);
+        padding: 10px;
+      }
+
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      nav ul li {
+        margin-right: 20px;
+      }
+
+      nav ul li:last-child {
+        margin-right: 0;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: rgb(87, 86, 86);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <a href=""
+          ><img
+            src="https://anonyviet.com/wp-content/uploads/2018/01/5aae503e4f037a5a4375944d8861fb6a.png"
+            width="10px"
+            height="90"
+            alt=""
+        /></a>
+      </div>
+      <ul>
+        <li><a href="#">Trang chủ</a></li>
+        <li><a href="#">Thời trang nam</a></li>
+        <li><a href="#">Thời trang nữ</a></li>
+        <li><a href="#">Tin tức</a></li>
+      </ul>
+      <div class="search-box">
+        <input type="text" placeholder="Tìm kiếm..." />
+        <button>Tìm kiếm</button>
+      </div>
+    </nav>
+    <div id="product" style="display: flex"></div>
+    <script>
+      function createComponent(data) {
+        const container = document.createElement("div");
+        container.classList.add("component-container");
+
+        const imageContainer = document.createElement("div");
+        imageContainer.classList.add("image-container");
+
+        const image = document.createElement("img");
+        image.src = data.image;
+
+        const name = document.createElement("div");
+        name.classList.add("name");
+        name.textContent = data.name;
+
+        const discount = document.createElement("div");
+        discount.classList.add("discount");
+        discount.textContent = data.discount;
+
+        const price = document.createElement("div");
+        price.classList.add("price");
+        price.textContent = data.price;
+
+        const buy = document.createElement("button");
+        buy.classList.add("buy");
+        buy.textContent = "Đặt Mua";
+
+        const detailsContainer = document.createElement("div");
+        detailsContainer.classList.add("details-container");
+        detailsContainer.appendChild(discount);
+        detailsContainer.appendChild(price);
+
+        imageContainer.appendChild(image);
+
+        container.appendChild(imageContainer);
+        container.appendChild(name);
+        container.appendChild(detailsContainer);
+        container.appendChild(buy);
+
+        return container;
+      }
+
+      const appElement = document.getElementById("product");
+      const women = [
+        {
+          image:
+            "https://down-vn.img.susercontent.com/file/sg-11134201-22100-pbrp1w40vviv42",
+          name: "Quần jean nữ-KO0002",
+          discount: "269.000 vnđ",
+          price: "370.000 vnđ",
+        },
+        {
+          image:
+            "https://zizoou.com/cdn/shop/products/Ao-khoac-jacket-form-rong-oversize-7-6-Ao-khoac-trang-be-ZiZoou-Store_de69df3e-1358-47b4-a3cf-6ed5a99b7782.jpg?v=1677890431",
+          name: "Áo khoác nữ-VN0002",
+          discount: "249.000 vnđ",
+          price: "369.000 vnđ",
+        },
+        {
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtZJ03xY0cIeMI3dOtvB1hvSXbiOHHhpH5TA&usqp=CAU",
+          name: "Áo phông nữ-US0002",
+          discount: "169.000 vnđ",
+          price: "390.000 vnđ",
+        },
+      ];
+      const men = [
+        {
+          image:
+            "https://maydep.vn/wp-content/uploads/2021/12/kieu-quan-tay-nam-ong-dung-dep-DQNA0008.jpg",
+          name: "The cosmo(Đen) Quần short khaki",
+          discount: "269.000 vnđ",
+        },
+        {
+          image:
+            "data:image/jpeg;base64,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",
+          name: "Quần baggy đen sang trọng QQ",
+          discount: "249.000 vnđ",
+        },
+        {
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW2KNl9zfeBjguhZChBG25Tp8ou2rZ-HUaYQ&usqp=CAU",
+          name: "The cosmo(Đen) Quần short khaki",
+          discount: "169.000 vnđ",
+        },
+      ];
+
+      function updateProductList(products) {
+        appElement.innerHTML = "";
+        for (const item of products) {
+          const product = createComponent(item);
+          appElement.appendChild(product);
+        }
+      }
+      const navItems = document.querySelectorAll("nav ul li a");
+      navItems.forEach((item) => {
+        item.addEventListener("click", function (event) {
+          event.preventDefault();
+          navItems.forEach((navItem) => {
+            navItem.classList.remove("active");
+          });
+          this.classList.add("active");
+          if (this.textContent === "Thời trang nam") {
+            updateProductList(men);
+          } else if (this.textContent === "Thời trang nữ") {
+            updateProductList(women);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
