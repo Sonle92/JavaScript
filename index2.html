@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <script src="./js.bootstrap.min.js"></script>
+    <script src="./js.jquery.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        max-width: 600px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #08b8cb;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      input[type="button"] {
+        padding: 10px 20px;
+        background-color: #2a2a2a;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type="button"]:hover {
+        background-color: #213b57;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table th,
+      table td {
+        padding: 10px;
+        border: 1px solid #3f3b6e;
+        text-align: center;
+      }
+
+      thead {
+        background-color: #1f3459;
+        color: #fff;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #ffffff;
+      }
+
+      tbody tr:hover {
+        background-color: #ffffff;
+      }
+    </style>
+  </head>
+  <body style="background-color: aqua">
+    <input type="button" value="Men" onclick="show()" />
+    <input type="button" value="Women" onclick="show1()" />
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>id</th>
+          <th>product name</th>
+          <th>image</th>
+          <th>price</th>
+          <th>total</th>
+        </tr>
+      </thead>
+
+      <tbody id="tbl"></tbody>
+    </table>
+    <script>
+      var arr = [
+        {
+          image:
+            "https://maydep.vn/wp-content/uploads/2021/12/kieu-quan-tay-nam-ong-dung-dep-DQNA0008.jpg",
+          name: "The cosmo(Đen) Quần short khaki",
+          price: "370.000 vnđ",
+          discount: "269.000 vnđ",
+        },
+        {
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW2KNl9zfeBjguhZChBG25Tp8ou2rZ-HUaYQ&usqp=CAU",
+          name: "The cosmo(Đen) Quần short khaki",
+          price: "370.000 vnđ",
+          discount: "169.000 vnđ",
+        },
+        {
+          image:
+            "https://down-vn.img.susercontent.com/file/sg-11134201-22100-pbrp1w40vviv42",
+          name: "Quần jean nữ-KO0002",
+          discount: "269.000 vnđ",
+          price: "370.000 vnđ",
+        },
+      ];
+
+      var women = [
+        {
+          image:
+            "https://down-vn.img.susercontent.com/file/sg-11134201-22100-pbrp1w40vviv42",
+          name: "Quần jean nữ-KO0002",
+          discount: "269.000 vnđ",
+          price: "370.000 vnđ",
+        },
+        {
+          image:
+            "https://zizoou.com/cdn/shop/products/Ao-khoac-jacket-form-rong-oversize-7-6-Ao-khoac-trang-be-ZiZoou-Store_de69df3e-1358-47b4-a3cf-6ed5a99b7782.jpg?v=1677890431",
+          name: "Áo khoác nữ-VN0002",
+          discount: "249.000 vnđ",
+          price: "369.000 vnđ",
+        },
+        {
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtZJ03xY0cIeMI3dOtvB1hvSXbiOHHhpH5TA&usqp=CAU",
+          name: "Áo phông nữ-US0002",
+          discount: "169.000 vnđ",
+          price: "390.000 vnđ",
+        },
+      ];
+      function show() {
+        var html = "";
+        var n = 1;
+        for (i in arr) {
+          html + "<tr>";
+          html += "<td>" + n + "</td>";
+          html += "<td>" + arr[i].name + "</td>";
+          html += "<td><img src=" + arr[i].image + " width=120></td>";
+          html += "<td>" + arr[i].discount + "</td>";
+          html += "<td>" + arr[i].price + "</td>";
+          html + "</tr>";
+          html += "</tr>";
+          n++;
+        }
+
+        document.getElementById("tbl").innerHTML = html;
+      }
+      function show1() {
+        var html = "";
+        var n = 1;
+        for (i in women) {
+          html + "<tr>";
+          html += "<td>" + n + "</td>";
+          html += "<td>" + women[i].name + "</td>";
+          html += "<td><img src=" + women[i].image + " width=120></td>";
+          html += "<td>" + women[i].discount + "</td>";
+          html += "<td>" + women[i].price + "</td>";
+          html + "</tr>";
+          html += "</tr>";
+          n++;
+        }
+
+        document.getElementById("tbl").innerHTML = html;
+      }
+    </script>
+  </body>
+</html>
