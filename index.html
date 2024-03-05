@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <script src="./js.bootstrap.min.js"></script>
+    <script src="./js.jquery.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        max-width: 600px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #08b8cb;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      input[type="button"] {
+        padding: 10px 20px;
+        background-color: #2a2a2a;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type="button"]:hover {
+        background-color: #213b57;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table th,
+      table td {
+        padding: 10px;
+        border: 1px solid #3f3b6e;
+        text-align: center;
+      }
+
+      thead {
+        background-color: #1f3459;
+        color: #fff;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #ffffff;
+      }
+
+      tbody tr:hover {
+        background-color: #ffffff;
+      }
+    </style>
+  </head>
+  <body style="background-color: aqua">
+    <h2>Fullname customer :</h2>
+    <input type="text" id="name" /><br />
+    <h2>Id:</h2>
+    <input type="text" id="id" /><br />
+    <h2>Name product:</h2>
+    <input type="text" id="product" /><br />
+    <h2>Quantity product:</h2>
+    <input type="text" id="quantity" /><br />
+    <h2>Price pro:</h2>
+    <input type="text" id="price" /><br /><br />
+
+    <input type="button" value="Save" onclick="save()" />
+    <input type="button" value="Show" onclick="show()" />
+    <input type="button" value="Reset" onclick="reset()" />
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>auto increment</th>
+          <th>customer name</th>
+          <th>id</th>
+          <th>product name</th>
+          <th>quantity</th>
+          <th>price</th>
+          <th>total</th>
+        </tr>
+      </thead>
+
+      <tbody id="tbl"></tbody>
+    </table>
+    <script>
+      var arr = [];
+      function save() {
+        var a = {
+          name: document.getElementById("name").value,
+          id: document.getElementById("id").value,
+          product: document.getElementById("product").value,
+          quantity: document.getElementById("quantity").value,
+          price: document.getElementById("price").value,
+        };
+        console.log(a);
+        arr.push(a);
+      }
+      function show() {
+        var html = "";
+        var n = 1;
+        for (i in arr) {
+          html + "<tr>";
+          html += "<td>" + n + "</td>";
+          html += "<td>" + arr[i].name + "</td>";
+          html += "<td>" + arr[i].id + "</td>";
+          html += "<td>" + arr[i].product + "</td>";
+          html += "<td>" + arr[i].quantity + "</td>";
+          html += "<td>" + arr[i].price + "</td>";
+          html +=
+            "<td>" +
+            parseFloat(arr[i].quantity) * parseFloat(arr[i].price) +
+            "</td>";
+          html + "</tr>";
+          html += "</tr>";
+          n++;
+        }
+
+        document.getElementById("tbl").innerHTML = html;
+      }
+      function reset() {
+        document.getElementById("name").value = "";
+        document.getElementById("id").value = "";
+        document.getElementById("product").value = "";
+        document.getElementById("quantity").value = "";
+        document.getElementById("price").value = "";
+      }
+    </script>
+  </body>
+</html>
