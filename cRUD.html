@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <script src="./js.bootstrap.min.js"></script>
+    <script src="./js.jquery.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      input[type="text"],
+      select {
+        width: 100%;
+        max-width: 600px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #08b8cb;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      input[type="button"] {
+        padding: 10px 20px;
+        background-color: #2a2a2a;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type="button"]:hover {
+        background-color: #213b57;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table th,
+      table td {
+        padding: 10px;
+        border: 1px solid #3f3b6e;
+        text-align: center;
+      }
+
+      thead {
+        background-color: #1f3459;
+        color: #fff;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #ffffff;
+      }
+
+      tbody tr:hover {
+        background-color: #ffffff;
+      }
+    </style>
+  </head>
+  <body style="background-color: aqua">
+    <div class="container">
+      <h2>Create Product</h2>
+      <input type="text" id="productName" placeholder="Product Name" />
+      <input type="text" id="productImage" placeholder="Image URL" />
+      <input type="text" id="productPrice" placeholder="Price" />
+      <input type="text" id="productDiscount" placeholder="Discount" />
+      <select id="productGender">
+        <option value="men">Men</option>
+        <option value="women">Women</option>
+      </select>
+      <input type="button" value="Create Product" onclick="createProduct()" />
+
+      <h2>Products</h2>
+      <input type="button" value="Show Men Products" onclick="show(arr)" />
+      <input type="button" value="Show Women Products" onclick="show(women)" />
+
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>id</th>
+            <th>product name</th>
+            <th>image</th>
+            <th>price</th>
+            <th>discount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="tbl"></tbody>
+      </table>
+
+      <div id="editForm" style="display: none">
+        <h2>Edit Product</h2>
+        <input type="text" id="editProductName" placeholder="Product Name" />
+        <input type="text" id="editProductImage" placeholder="Image URL" />
+        <input type="text" id="editProductPrice" placeholder="Price" />
+        <input type="text" id="editProductDiscount" placeholder="Discount" />
+        <input type="button" value="Update Product" onclick="updateProduct()" />
+      </div>
+    </div>
+
+    <script>
+      var arr = [
+        {
+          image:
+            "https://maydep.vn/wp-content/uploads/2021/12/kieu-quan-tay-nam-ong-dung-dep-DQNA0008.jpg",
+          name: "The cosmo(Đen) Quần short khaki",
+          price: "370.000 vnđ",
+          discount: "269.000 vnđ",
+        },
+        {
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW2KNl9zfeBjguhZChBG25Tp8ou2rZ-HUaYQ&usqp=CAU",
+          name: "The cosmo(Đen) Quần short khaki",
+          price: "370.000 vnđ",
+          discount: "169.000 vnđ",
+        },
+        {
+          image:
+            "https://down-vn.img.susercontent.com/file/sg-11134201-22100-pbrp1w40vviv42",
+          name: "Quần jean nữ-KO0002",
+          discount: "269.000 vnđ",
+          price: "370.000 vnđ",
+        },
+      ];
+
+      var women = [
+        {
+          image:
+            "https://down-vn.img.susercontent.com/file/sg-11134201-22100-pbrp1w40vviv42",
+          name: "Quần jean nữ-KO0002",
+          discount: "269.000 vnđ",
+          price: "370.000 vnđ",
+        },
+        {
+          image:
+            "https://zizoou.com/cdn/shop/products/Ao-khoac-jacket-form-rong-oversize-7-6-Ao-khoac-trang-be-ZiZoou-Store_de69df3e-1358-47b4-a3cf-6ed5a99b7782.jpg?v=1677890431",
+          name: "Áo khoác nữ-VN0002",
+          discount: "249.000 vnđ",
+          price: "369.000 vnđ",
+        },
+        {
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtZJ03xY0cIeMI3dOtvB1hvSXbiOHHhpH5TA&usqp=CAU",
+          name: "Áo phông nữ-US0002",
+          discount: "169.000 vnđ",
+          price: "390.000 vnđ",
+        },
+      ];
+
+      function show(data) {
+        var html = "";
+        for (var i = 0; i < data.length; i++) {
+          html += "<tr>";
+          html += "<td>" + (i + 1) + "</td>";
+          html += "<td>" + data[i].name + "</td>";
+          html +=
+            "<td><img src='" +
+            data[i].image +
+            "' width='120' alt='product image'></td>";
+          html += "<td>" + data[i].price + "</td>";
+          html += "<td>" + data[i].discount + "</td>";
+          html +=
+            "<td><button onclick='editProduct(" +
+            i +
+            ")'>Edit</button><button onclick='deleteProduct(" +
+            i +
+            ")'>Delete</button></td>";
+          html += "</tr>";
+        }
+
+        document.getElementById("tbl").innerHTML = html;
+      }
+
+      function createProduct() {
+        var productName = document.getElementById("productName").value;
+        var productImage = document.getElementById("productImage").value;
+        var productPrice = document.getElementById("productPrice").value;
+        var productDiscount = document.getElementById("productDiscount").value;
+        var productGender = document.getElementById("productGender").value;
+
+        var newProduct = {
+          name: productName,
+          image: productImage,
+          price: productPrice,
+          discount: productDiscount,
+        };
+
+        if (productGender === "men") {
+          arr.push(newProduct);
+        } else if (productGender === "women") {
+          women.push(newProduct);
+        }
+
+        document.getElementById("productName").value = "";
+        document.getElementById("productImage").value = "";
+        document.getElementById("productPrice").value = "";
+        document.getElementById("productDiscount").value = "";
+
+        show(productGender === "men" ? arr : women);
+      }
+
+      function editProduct(index) {
+        document.getElementById("editProductName").value = arr[index].name;
+        document.getElementById("editProductImage").value = arr[index].image;
+        document.getElementById("editProductPrice").value = arr[index].price;
+        document.getElementById("editProductDiscount").value =
+          arr[index].discount;
+
+        document.getElementById("editForm").style.display = "block";
+      }
+
+      function updateProduct() {
+        var newName = document.getElementById("editProductName").value;
+        var newImage = document.getElementById("editProductImage").value;
+        var newPrice = document.getElementById("editProductPrice").value;
+        var newDiscount = document.getElementById("editProductDiscount").value;
+
+        var indexToUpdate = parseInt(
+          document.getElementById("editIndex").value
+        );
+        arr[indexToUpdate].name = newName;
+        arr[indexToUpdate].image = newImage;
+        arr[indexToUpdate].price = newPrice;
+        arr[indexToUpdate].discount = newDiscount;
+
+        document.getElementById("editForm").style.display = "none";
+
+        show(arr);
+      }
+
+      function deleteProduct(index) {
+        arr.splice(index, 1);
+        show(arr);
+      }
+    </script>
+  </body>
+</html>
