@@ -9,73 +9,95 @@
     <link rel="stylesheet" href="./style.css" />
     <title>Document</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-      }
+     body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    }
 
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
+    .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    }
 
-      h2 {
-        color: #333;
-      }
+    h2 {
+    color: #333;
+    }
 
-      input[type="text"],
-      select {
-        width: 100%;
-        max-width: 600px;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #08b8cb;
-        border-radius: 5px;
-        box-sizing: border-box;
-      }
+    input[type="text"],
+    select {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #08b8cb;
+    border-radius: 5px;
+    box-sizing: border-box;
+    }
 
-      input[type="button"] {
-        padding: 10px 20px;
-        background-color: #2a2a2a;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
+    input[type="button"] {
+    padding: 10px 20px;
+    background-color: #2a2a2a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
 
-      input[type="button"]:hover {
-        background-color: #213b57;
-      }
+    input[type="button"]:hover {
+    background-color: #213b57;
+    }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-      }
+    .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    }
 
-      table th,
-      table td {
-        padding: 10px;
-        border: 1px solid #3f3b6e;
-        text-align: center;
-      }
+    .card {
+    width: 30%;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
 
-      thead {
-        background-color: #1f3459;
-        color: #fff;
-      }
+    .card img {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    }
 
-      tbody tr:nth-child(even) {
-        background-color: #ffffff;
-      }
+    .card-body {
+    padding: 15px;
+    }
 
-      tbody tr:hover {
-        background-color: #ffffff;
-      }
+    .card-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    }
+
+    .card-text {
+    margin: 5px 0;
+    }
+
+    .card-buttons button {
+    padding: 5px 10px;
+    background-color: #2a2a2a;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    }
+
+    .card-buttons button:hover {
+    background-color: #213b57;
+    }
+
     </style>
   </head>
-  <body style="background-color: aqua">
+  <body style="background-color: rgb(243, 142, 75)">
     <div class="container">
       <h2>Create Product</h2>
       <input type="text" id="productName" placeholder="Product Name" />
@@ -92,20 +114,7 @@
       <input type="button" value="Show Men Products" onclick="show(arr)" />
       <input type="button" value="Show Women Products" onclick="show(women)" />
 
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th>id</th>
-            <th>product name</th>
-            <th>image</th>
-            <th>price</th>
-            <th>discount</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody id="tbl"></tbody>
-      </table>
+      <div class="card-container" id="tbl"></div>
 
       <div id="editForm" style="display: none">
         <h2>Edit Product</h2>
@@ -116,7 +125,7 @@
         <input type="button" value="Update Product" onclick="updateProduct()" />
       </div>
     </div>
-
+  </body>
     <script>
       var arr = [
         {
@@ -169,22 +178,15 @@
       function show(data) {
         var html = "";
         for (var i = 0; i < data.length; i++) {
-          html += "<tr>";
-          html += "<td>" + (i + 1) + "</td>";
-          html += "<td>" + data[i].name + "</td>";
-          html +=
-            "<td><img src='" +
-            data[i].image +
-            "' width='120' alt='product image'></td>";
-          html += "<td>" + data[i].price + "</td>";
-          html += "<td>" + data[i].discount + "</td>";
-          html +=
-            "<td><button onclick='editProduct(" +
-            i +
-            ")'>Edit</button><button onclick='deleteProduct(" +
-            i +
-            ")'>Delete</button></td>";
-          html += "</tr>";
+          html += "<div class='card'>";
+          html += "<img src='" + data[i].image + "' alt='product image'>";
+          html += "<div class='card-body'>";
+          html += "<h5 class='card-title'>" + data[i].name + "</h5>";
+          html += "<p class='card-text'>Price: " + data[i].price + "</p>";
+          html += "<p class='card-text'>Discount: " + data[i].discount + "</p>";
+          html += "<button onclick='editProduct(" + i + ")'>Edit</button>";
+          html += "<button onclick='deleteProduct(" + i + ")'>Delete</button>";
+          html += "</div></div>";
         }
 
         document.getElementById("tbl").innerHTML = html;
