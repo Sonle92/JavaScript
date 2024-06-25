@@ -106,3 +106,5 @@ function showProducts() {
     document.getElementById("women").innerHTML += demo;
   }
 }
+
+const bien_cu=[];
