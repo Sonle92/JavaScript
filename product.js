@@ -109,4 +109,5 @@ function showProducts() {
 
 const bien_moi=[];
 const bien_cu=[];
+const bien1=1;
 const bienthu3=[];
