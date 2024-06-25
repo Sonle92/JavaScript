@@ -108,3 +108,4 @@ function showProducts() {
 }
 
 const bien_cu=[];
+const bien_thu2=[];
